@@ -10,7 +10,7 @@ node{
         sh 'apk add sshpass'
         sh 'rm -fr /root/.ssh/*'
         sh 'ssh-keygen -q -t rsa -N \'\' -f "/root/.ssh/id_rsa"'
-        sh 'sshpass -p \'root\' ssh-copy-id  -o stricthostkeychecking=no "root@app-salaire.issaga.form"'
+        sh 'sshpass -p \'root\' ssh-copy-id  -o stricthostkeychecking=no "root@app-salaire.hugo-aubry.form"'
         
             
       }
