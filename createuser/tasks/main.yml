@@ -1,0 +1,22 @@
+---
+
+  - name: Ajout du groupe
+    group:
+      name: app-salaire
+      state: present
+
+  - name: Creation de utilisateur
+    user:
+      name: app-salaire
+      group: app-salaire
+
+  - name: Ajout de la clé ssh
+    authorized_key:
+      user: app-salaire
+      state: present
+      key: "{{ lookup('file', '/home/app-salaire/.ssh/id_rsa.pub') }}"
+
+  - name: Ajout de utilisateur dans sudo
+    template:
+      src: main.yml
+      dest: /etc/sudoers.d/{{ user }}

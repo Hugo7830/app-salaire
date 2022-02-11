@@ -1,0 +1,5 @@
+mysql_user: "root"
+mysql_password: "root"
+mysql_dbname: "app-salaire"
+db_host: "192.168.56.108"
+webserver_host: "192.168.56.103"

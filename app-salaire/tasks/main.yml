@@ -1,0 +1,48 @@
+# tasks file for app-salaire
+
+  - name: "Creation de la clé en local"
+    user:
+     name: "app-salaire"
+     generate_ssh_key: yes
+
+  - name: "Ajout du groupe ansible"
+    group:
+     name: ansible
+     state: present
+
+  - name: "Creation de l'utilisateur"
+    user:
+     name: "app-salaire"
+     group: ansible
+
+  - name: "Copie de la clé publique vers la machine cliente"
+    authorized_key:
+     user: "app-salaire"
+     state: present
+     key: "{{ lookup('file', '/home/app-salaire/.ssh/id_rsa.pub') }}"
+
+  - name: "Installation des packages"
+    yum:
+     name:
+           - httpd
+           - mariadb-server 
+     state: present
+     update_cache: yes
+   
+  - name: "Redemarrage MariaDB"
+    systemd:
+     name: mariadb
+     state: started
+     enabled: yes
+  
+  - name: "Demarrage Apache2"
+    systemd:
+     name: httpd
+     state: started
+     enabled: yes
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+---
+# tasks file for mariadb
+- name: Installation mysql
+  yum:
+   name:
+    - mariadb-server
+   state: present
+
+- name: Demarrage MariaDB
+  systemd: 
+   name: mariadb
+   state: started
+   enabled: yes
+
+- name: Autoriser connexions externe MySQL (1/2)
+  lineinfile:
+   path: /etc/mysql/mysql.conf.d/mysqld.cnf
+   regexp: '^skip-external-locking'
+   line: "# skip-external-locking"
+  notify: Restart mysql
+
+- name: Autoriser connexions externe MySQL (2/2)
+  lineinfile:
+   path: /etc/mysql/mysql.conf.d/mysqld.cnf
+   regexp: '^bind-address'
+   line: "# bind-address"
+  notify: Restart mysql
+
+
