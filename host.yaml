@@ -1,4 +1,4 @@
 web:
   hosts:
-    app-salaire.hugo-aubry.form
+    app-salaire.hugo-aubry.form:
 
